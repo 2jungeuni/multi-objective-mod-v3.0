@@ -320,6 +320,12 @@ if __name__ == "__main__":
     num_veh = len(args.vehicle) # number of vehicles
     penalty = args.penalty      # penalty give for not visiting a location
 
+    # overlapping user id
+    if len(args.pudo) > len(set(list(map(lambda x: x[0], args.pudo)))):
+        sys.exit("User IDs overlap. Create different user IDs.")
+    if len(args.vehicle) > len(set(list(map(lambda x: x[0], args.vehicle)))):
+        sys.exit("Vehicle IDs overlap. Create different vehicle IDs.")
+
     # problem setting
     data, planner = create_data_model(func=RoutingPlanner, num_veh=num_veh, pudo=args.pudo, penalty=penalty,
                                       veh=args.vehicle, alpha=args.weight[0], beta=args.weight[1], gamma=args.weight[2])
